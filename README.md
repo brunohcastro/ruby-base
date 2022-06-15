@@ -2,23 +2,44 @@
 
 ## Usage
 
-If you want to start a rails application, you can clone this repo to the project folder and run the following commands:
+### Base commands
 
 ```bash
-$ ./docker/run gem install rails
-$ ./docker/run rails new . --force --database=sqlite3
+# Runs the command inside an ephemeral container using the app service described in the docker-compose file as a base
+$ dbin/exec <command>
+
+# Rebuild the image after any changes to the dockerfile
+$ dbin/build
+
+# Remove all containers and their volumes (WARNING any cache or files not stored in the filesystem will be deleted)
+$ dbin/dispose
+
+# Moves the target folder contents to the root folder and deletes the target folder
+# it also renames this file to INSTRUCTIONS.md
+$ dbin/mvroot <target>
 ```
 
-If you want to use another database, you'll need to edit the `./docker/Dockerfile` and uncomment the desired database dependencies.
-
-To rebuild the image after any changes to the dockerfile, run:
+### Aliases
 
 ```bash
-$ ./docker/build
+# Creates a new file in dbin to alias that command inside the docker container
+$ dbin/mkalias
+
+# Runs gem in the project folder
+$ dbin/gem
+
+# Runs bundle in the project folder
+$ dbin/bundle
 ```
 
-To of dispose all container and volumes, run:
+## Examples
+
+### Rails app
 
 ```bash
-$ ./docker/dispose
+$ dbin/gem install rails
+$ dbin/mkalias rails
+$ mv README.md INSTRUCTIONS.md
+$ dbin/rails new . --force
+$ dbin/rails s
 ```

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+command="$1"
+
+cat >$DIR/$command <<EOL
+#!/bin/bash
+
+DIR="\$(cd "\$(dirname "\$0")" && pwd)"
+
+. \$DIR/exec ${command} \$@
+EOL
+
+chmod +x $DIR/$command

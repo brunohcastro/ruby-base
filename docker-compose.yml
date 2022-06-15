@@ -4,16 +4,14 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/Dockerfile.dev
       args:
         USER_ID: ${USER_ID:-1000}
         GROUP_ID: ${GROUP_ID:-1000}
-    ports:
-      - "${PORT:-3000}:3000"
+    network_mode: host
     volumes:
       - .:/app
       - bundle_cache:/bundle
-    command: 'bundle exec rails s -p 3000 -b 0.0.0.0'
 
 volumes:
   bundle_cache:
