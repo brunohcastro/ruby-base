@@ -2,4 +2,4 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-. $DIR/exec bundle $@
+. $DIR/run bundle $@

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if docker-compose ps -a | grep -E -i -q 'app(\s*)running'; then
-  USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose run --rm app $@
-else
-  USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose run --rm --service-ports app $@
-fi

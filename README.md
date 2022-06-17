@@ -5,8 +5,8 @@
 ### Base commands
 
 ```bash
-# Runs the command inside an ephemeral container using the app service described in the docker-compose file as a base
-$ dbin/exec <command>
+# Runs the command inside an ephemeral container using the app service described in the docker-compose file as a base (use the --root flag if the command should be run as root)
+$ dbin/run [--root] <command>
 
 # Rebuild the image after any changes to the dockerfile
 $ dbin/build
@@ -22,8 +22,11 @@ $ dbin/mvroot <target>
 ### Aliases
 
 ```bash
-# Creates a new file in dbin to alias that command inside the docker container
-$ dbin/mkalias
+# Creates a new file in dbin to alias that command inside the docker container (use the --root flag if the command should be run as root)
+$ dbin/mkalias [--root] <command>
+
+# Opens a new terminal in the project folder (use the --root flag if the shell should assume the root user)
+$ dbin/shell [--root]
 
 # Runs gem in the project folder
 $ dbin/gem
@@ -32,14 +35,24 @@ $ dbin/gem
 $ dbin/bundle
 ```
 
+### Helpers
+
+```bash
+# Adds dbin folder to the PATH only for the current terminal session.
+$ source dbin/local-env
+
+# After using this command you can use the any script inside the dbin folder without the dbin/ prefix
+```
+
 ## Examples
 
 ### Rails app
 
 ```bash
-$ dbin/gem install rails
-$ dbin/mkalias rails
+$ source dbin/local-env
+$ gem install rails
+$ mkalias rails
 $ mv README.md INSTRUCTIONS.md
-$ dbin/rails new . --force
-$ dbin/rails s
+$ rails new . --force
+$ rails s
 ```
