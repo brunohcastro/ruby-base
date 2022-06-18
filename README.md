@@ -17,6 +17,9 @@ $ dbin/dispose
 # Moves the target folder contents to the root folder and deletes the target folder
 # it also renames this file to INSTRUCTIONS.md
 $ dbin/mvroot <target>
+
+# Appends a RUN command to the base image, useful to install new packages
+$ dbin/chimg <command>
 ```
 
 ### Aliases
@@ -47,12 +50,34 @@ $ source dbin/local-env
 ## Examples
 
 ### Rails app
-
 ```bash
+# (optional) Add the dbin/ folder to your PATH, if you choose to do this step, all commands will be available without the dbin/ prefix
 $ source dbin/local-env
-$ gem install rails
-$ mkalias rails
-$ mv README.md INSTRUCTIONS.md
-$ rails new . --force
-$ rails s
+
+# Install rails
+$ dbin/gem install rails
+
+# Installing the database libs
+
+# if using PostgreSQL:
+$ dbin/chimg sudo apk add postgresql-client postgresql-dev
+
+# if using MySQL:
+$ dbin/chimg sudo apk add mysql-client mysql-dev
+
+# if using SQLite:
+$ dbin/chimg sudo apk add sqlite sqlite-dev
+
+
+# Rename this file so rails doesn´t overwrites it
+$ mv README.md USAGE.md
+
+# Create a new rails app
+$ dbin/run rails new . --force [--database [sqlite3 | postgresql | mysql]]
+
+# Create an alias for using the local app rails
+$ dbin/mkalias bin/rails
+
+# Start the application
+$ dbin/rails s
 ```
