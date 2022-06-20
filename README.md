@@ -25,8 +25,8 @@ $ dbin/chimg <command>
 ### Aliases
 
 ```bash
-# Creates a new file in dbin to alias that command inside the docker container (use the --root flag if the command should be run as root)
-$ dbin/mkalias [--root] <command>
+# Creates a new <name> file in dbin to alias the <command> inside the docker container (use the --root flag if the command should be run as root)
+$ dbin/mkalias [--root] <name> <command>
 
 # Opens a new terminal in the project folder (use the --root flag if the shell should assume the root user)
 $ dbin/shell [--root]

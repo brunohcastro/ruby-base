@@ -4,14 +4,15 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if [[ $1 == --root ]] ; then
   runner="\$DIR/run --root"
-  command=$2
-  shift 1
+  name=$2
+  shift 2
 else
   runner="\$DIR/run"
-  command=$1
+  name=$1
+  shift 1
 fi
 
-cat >$DIR/$command <<EOL
+cat >$DIR/$name <<EOL
 #!/bin/bash
 
 DIR="\$(cd "\$(dirname "\$0")" && pwd)"
@@ -19,4 +20,4 @@ DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 . $runner $@ \$@
 EOL
 
-chmod +x $DIR/$command
+chmod +x $DIR/$name
