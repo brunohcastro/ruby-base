@@ -1,16 +1,13 @@
 #!/bin/bash
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
 PARENT_DIR="$(cd "$(dirname "$0")" && cd .. && pwd)"
 
-cp $PARENT_DIR/docker/Dockerfile.dev $PARENT_DIR/docker/Dockerfile.dev.bkp
+cp "$PARENT_DIR/docker/Dockerfile.dev" "$PARENT_DIR/docker/Dockerfile.dev.bkp"
 
-echo -e "\nRUN $@" >> $PARENT_DIR/docker/Dockerfile.dev
+echo -e "\nRUN $*" >> "$PARENT_DIR/docker/Dockerfile.dev"
 
-USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose build app
-
-if [ $? -eq 0 ]; then
-   rm -f $PARENT_DIR/docker/Dockerfile.dev.bkp
+if USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose build app; then
+   rm -f "$PARENT_DIR/docker/Dockerfile.dev.bkp"
 else
-   mv $PARENT_DIR/docker/Dockerfile.dev.bkp $PARENT_DIR/docker/Dockerfile.dev
+   mv "$PARENT_DIR/docker/Dockerfile.dev.bkp" "$PARENT_DIR/docker/Dockerfile.dev"
 fi

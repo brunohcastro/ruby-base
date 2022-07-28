@@ -12,12 +12,12 @@ else
   shift 1
 fi
 
-cat >$DIR/$name <<EOL
+cat >"$DIR/$name" <<EOL
 #!/bin/bash
 
 DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 
-. $runner $@ \$@
+. "$runner" $@ "\$@"
 EOL
 
-chmod +x $DIR/$name
+chmod +x "$DIR/$name"
