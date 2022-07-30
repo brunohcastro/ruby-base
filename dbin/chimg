@@ -6,7 +6,7 @@ cp "$PARENT_DIR/docker/Dockerfile.dev" "$PARENT_DIR/docker/Dockerfile.dev.bkp"
 
 echo -e "\nRUN $*" >> "$PARENT_DIR/docker/Dockerfile.dev"
 
-if USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose build app; then
+if USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose build dev; then
    rm -f "$PARENT_DIR/docker/Dockerfile.dev.bkp"
 else
    mv "$PARENT_DIR/docker/Dockerfile.dev.bkp" "$PARENT_DIR/docker/Dockerfile.dev"

@@ -76,7 +76,7 @@ $ mv README.md USAGE.md
 $ dbin/run rails new . --force [--database [sqlite3 | postgresql | mysql]]
 
 # Create an alias for using the local app rails
-$ dbin/mkalias bin/rails
+$ dbin/mkalias rails bin/rails
 
 # Start the application
 $ dbin/rails s

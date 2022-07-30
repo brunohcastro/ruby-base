@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  app:
+  dev:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.dev
@@ -15,6 +15,8 @@ services:
       - .:/opt/ruby-app
       - bundle_cache:/usr/local/bundle
     tty: true
+    profiles:
+      - dev
 
 volumes:
   bundle_cache:
